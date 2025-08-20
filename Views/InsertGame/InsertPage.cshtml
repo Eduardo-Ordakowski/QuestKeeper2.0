@@ -1,0 +1,27 @@
+﻿@model GameModel;
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Banner</th>
+        <th>Icone</th>
+        <th>Nome</th>
+        <th>Genero</th>
+        <th>Descrição</th>
+        <th>Desenvolvedor</th>
+        <th>Data de lançamento</th>
+    </tr>
+</table>
+
+<form method="post" asp-controller="InsertGame" asp-action="CreateGame" id="gameRegister">
+    <label>
+        <input type="file" asp-for="BannerImgUrl"/>
+        <input type="file" asp-for="IconImg" />
+        <input type="text" asp-for="Name" />
+        <input type="text" asp-for="Genre" />
+        <input type="text" asp-for="Description" />
+        <input type="text" asp-for="Developer" />
+        <input type="datetime" asp-for="RealeseDate" />
+    </label>
+</form>
+    <button type="submit" form="gameRegister">Enviar</button>

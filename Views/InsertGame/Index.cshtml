@@ -1,0 +1,32 @@
+﻿@model List<GameModel>;
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Banner</th>
+        <th>Icone</th>
+        <th>Nome</th>
+        <th>Genero</th>
+        <th>Descrição</th>
+        <th>Desenvolvedor</th>
+        <th>Data de lançamento</th>
+    </tr>
+    @if(Model != null)
+    {
+        @foreach(var Game in Model)
+        {
+            
+            <tr>
+                <td>@Game.Id</td>
+                <td>@Game.BannerImgUrl</td>
+                <td>@Game.IconImg</td>
+                <td>@Game.Name</td>
+                <td>@Game.Genre</td>
+                <td>@Game.Description</td>
+                <td>@Game.Developer</td
+                <td>@Game.RealeseDate</td>
+            </tr>
+        }
+    }
+</table>
+
+<a asp-controller="InsertGame" asp-action="InsertPage"><button type="button">Inserir</button></a>
