@@ -1,0 +1,30 @@
+﻿@model GameModel;
+@{
+    ViewData["Title"] = "Pagina de Update";
+}
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Banner</th>
+        <th>Icone</th>
+        <th>Nome</th>
+        <th>Genero</th>
+        <th>Descrição</th>
+        <th>Desenvolvedor</th>
+        <th>Data de lançamento</th>
+    </tr>
+    @if (Model != null)
+    {
+        <form method="post" asp-controller="InsertGame" asp-action="UpdateGame" id="gameRegister">
+            <label>
+                <input type="hidden" asp-for="@Model.Id"/>
+                <input type="text" asp-for="@Model.Name" />
+                <input type="text" asp-for="@Model.Genre" />
+                <input type="text" asp-for="@Model.Description" />
+                <input type="text" asp-for="@Model.Developer" />
+                <input type="datetime" asp-for="@Model.RealeseDate" />
+            </label>
+        </form>
+    }
+</table>
+    <button type="submit" form="gameRegister">Concluir</button>

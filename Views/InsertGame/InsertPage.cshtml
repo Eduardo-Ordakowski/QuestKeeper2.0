@@ -16,12 +16,12 @@
 <form method="post" asp-controller="InsertGame" asp-action="CreateGame" id="gameRegister">
     <label>
         <input type="file" asp-for="BannerImgUrl"/>
-        <input type="file" asp-for="IconImg" />
-        <input type="text" asp-for="Name" />
-        <input type="text" asp-for="Genre" />
-        <input type="text" asp-for="Description" />
-        <input type="text" asp-for="Developer" />
-        <input type="datetime" asp-for="RealeseDate" />
+        <input type="file" asp-for="IconImg"/>
+        <input type="text" asp-for="Name" value="@Model.Name" />
+        <input type="text" asp-for="Genre" value="@Model.Genre" />
+        <input type="text" asp-for="Description" value="@Model.Description" />
+        <input type="text" asp-for="Developer" value="@Model.Developer" />
+        <input type="datetime" asp-for="RealeseDate" value="@Model.RealeseDate" />
     </label>
 </form>
     <button type="submit" form="gameRegister">Enviar</button>
