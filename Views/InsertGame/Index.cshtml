@@ -1,33 +1,114 @@
-﻿@model List<GameModel>;
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Banner</th>
-        <th>Icone</th>
-        <th>Nome</th>
-        <th>Genero</th>
-        <th>Descrição</th>
-        <th>Desenvolvedor</th>
-        <th>Data de lançamento</th>
-    </tr>
-    @if(Model != null)
+@model List<GameModel>;
+
+@{
+    ViewData["Title"] = "Biblioteca de Jogos";
+}
+
+<div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">Minha biblioteca</h1>
+            <p class="text-gray-600">
+                @if(Model != null && Model.Any())
+                {
+                    <span>@Model.Count jogo(s) na sua biblioteca</span>
+                }
+                else
+                {
+                    <span>Sua biblioteca está vazia. Que tal adicionar seu primeiro jogo?</span>
+                }
+            </p>
+        </div>
+        <a asp-controller="InsertGame" asp-action="InsertPage" class="btn-primary mt-4 sm:mt-0">
+            + Adicionar Jogo
+        </a>
+    </div>
+
+    @if(Model != null && Model.Any())
     {
-        @foreach(var Game in Model)
-        {
-            <tr>
-                <td>@Game.Id</td>
-                <td>@Game.BannerImgUrl</td>
-                <td>@Game.IconImg</td>
-                <td>@Game.Name</td>
-                <td>@Game.Genre</td>
-                <td>@Game.Description</td>
-                <td>@Game.Developer</td>
-                <td>@Game.RealeseDate</td>
+        <!-- Games Grid -->
+        <div class="game-grid">
+            @foreach(var game in Model)
+            {
+                <div class="game-card group">
+                    <!-- Game Icon -->
+                    <div class="aspect-square overflow-hidden bg-gray-100">
+                        @if(!string.IsNullOrEmpty(game.IconImg))
+                        {
+                            <img src="@game.IconImg" 
+                                 alt="@game.Name" 
+                                 class="game-icon group-hover:scale-105 transition-transform duration-300" />
+                        }
+                        else
+                        {
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-pink-100 to-rose-100">
+                                <span class="text-4xl">🎮</span>
+                            </div>
+                        }
+                    </div>
+                    
+                    <!-- Game Info -->
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 text-sm mb-1 line-clamp-2 group-hover:text-pink-600 transition-colors duration-200">
+                            @game.Name
+                        </h3>
+                        <p class="text-xs text-gray-500 mb-2">@game.Genre</p>
+                        <p class="text-xs text-gray-400">@game.Developer</p>
+                        
+                        <!-- Action Buttons -->
+                        <div class="flex gap-2 mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <a asp-controller="InsertGame" asp-action="Details" asp-route-id="@game.Id" 
+                               class="flex-1 bg-pink-500 hover:bg-pink-600 text-white text-xs py-1 px-2 rounded text-center transition-colors duration-200">
+                                Ver
+                            </a>
+                            <a asp-controller="InsertGame" asp-action="UpdatePage" asp-route-id="@game.Id" 
+                               class="flex-1 bg-gray-500 hover:bg-gray-600 text-white text-xs py-1 px-2 rounded text-center transition-colors duration-200">
+                                Editar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
 
-                <a asp-controller="InsertGame" asp-action="UpdatePage" asp-route-id=@Game.Id class="btn btn-primary" role="button">Editar</a>
-            </tr>
-        }
+        <div class="text-center mt-12">
+            <p class="text-gray-500 text-sm">
+                Mostrando todos os @Model.Count jogo(s)
+            </p>
+        </div>
     }
-</table>
+    else
+    {
+        <!-- Empty State -->
+        <div class="text-center py-16">
+            <div class="card max-w-md mx-auto">
+                <div class="card-body">
+                    <div class="w-20 h-20 bg-gradient-to-r from-pink-100 to-rose-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <span class="text-4xl">📚</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">
+                        Biblioteca vazia
+                    </h3>
+                    <p class="text-gray-600 mb-6">
+                        Você ainda não adicionou nenhum jogo à sua biblioteca. 
+                        Comece adicionando seus jogos favoritos!
+                    </p>
+                    <a asp-controller="InsertGame" asp-action="InsertPage" class="btn-primary">
+                        🎮 Adicionar primeiro jogo
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
 
-<a asp-controller="InsertGame" asp-action="InsertPage"><button type="button">Inserir</button></a>
+<style>
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+
