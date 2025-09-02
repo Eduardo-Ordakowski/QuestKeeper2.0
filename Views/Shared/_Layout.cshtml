@@ -1,50 +1,110 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - QuestKeeper2._0</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/QuestKeeper2._0.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - QuestKeeper</title>
+    <link rel="stylesheet" href="~/css/tailwind.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">QuestKeeper2._0</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+<body class="bg-gradient-to-br from-pink-50 to-rose-50 min-h-screen font-sans">
+    <header class="bg-white shadow-lg border-b border-pink-200">
+        <nav class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo/Brand -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-r from-pink-500 to-rose-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">Q</span>
+                    </div>
+                    <a class="text-2xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent" 
+                       asp-area="" asp-controller="Home" asp-action="Index">
+                        QuestKeeper
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a class="text-gray-700 hover:text-pink-600 font-medium transition-colors duration-200" 
+                       asp-area="" asp-controller="Home" asp-action="Index">
+                        Home
+                    </a>
+                    <a class="text-gray-700 hover:text-pink-600 font-medium transition-colors duration-200" 
+                       asp-area="" asp-controller="InsertGame" asp-action="Index">
+                        Lista de Jogos
+                    </a>
+                    <a class="btn-primary" 
+                       asp-area="" asp-controller="InsertGame" asp-action="InsertPage">
+                        + Adicionar Jogo
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="InsertGame" asp-action="Index">Inserir Jogo!</a>
-                        </li>
-                    </ul>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-200">
+                <div class="flex flex-col space-y-3 pt-4">
+                    <a class="text-gray-700 hover:text-pink-600 font-medium transition-colors duration-200 py-2" 
+                       asp-area="" asp-controller="Home" asp-action="Index">
+                        Home
+                    </a>
+                    <a class="text-gray-700 hover:text-pink-600 font-medium transition-colors duration-200 py-2" 
+                       asp-area="" asp-controller="InsertGame" asp-action="Index">
+                        Lista de Jogos
+                    </a>
+                    <a class="btn-primary inline-block text-center mt-2" 
+                       asp-area="" asp-controller="InsertGame" asp-action="InsertPage">
+                        + Adicionar Jogo
+                    </a>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - QuestKeeper2._0 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <main class="container mx-auto px-4 py-8 min-h-screen">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-white border-t border-pink-200 mt-16">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-600 text-sm mb-4 md:mb-0">
+                    &copy; 2025 QuestKeeper - Seu backlog de jogos organizado
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a class="text-gray-500 hover:text-pink-600 text-sm transition-colors duration-200" 
+                       asp-area="" asp-controller="Home" asp-action="Privacy">
+                        Privacidade
+                    </a>
+                    <div class="text-gray-400 text-xs">
+                        Feito com ❤️ e Tailwind CSS
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/image-upload.js" asp-append-version="true"></script>
+    
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
