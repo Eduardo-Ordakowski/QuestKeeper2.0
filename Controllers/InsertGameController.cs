@@ -45,7 +45,7 @@ namespace QuestKeeper2._0.Controllers
         {
             var NewGame = Game;
             
-            if(Game == null)
+            if(!ModelState.IsValid)
             {
                 throw new Exception("Campos não foram preenchidos devidamente");
             }
@@ -53,7 +53,7 @@ namespace QuestKeeper2._0.Controllers
             _db.Game.Add(NewGame);
             await _db.SaveChangesAsync();
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -75,7 +75,7 @@ namespace QuestKeeper2._0.Controllers
             _db.Game.Update(GameToUpdate);
             await _db.SaveChangesAsync();
 
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
 }
