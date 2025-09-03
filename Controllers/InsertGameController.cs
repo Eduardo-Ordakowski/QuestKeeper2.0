@@ -77,5 +77,22 @@ namespace QuestKeeper2._0.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult DeleteGame (int Id)
+        {
+
+            var GameToDelete = _db.Game.Find(Id);
+
+            if(GameToDelete == null)
+            {
+                throw new Exception("Id não localizado!");
+            }
+
+            _db.Game.Remove(GameToDelete);
+            _db.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
     }
 }
